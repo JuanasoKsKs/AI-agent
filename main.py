@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 from google import genai
 import sys
 from google.genai import types
-
+from functions import *
 
 
 load_dotenv()
@@ -18,6 +18,7 @@ def main():
     if len(sys.argv) < 2:
         print("Tool usage: uv run main.py <prompt>")
         print("Error: missing prompt", file=sys.stderr)
+        print(os.path.join("/home/juenaso/AIagent", "."))
         sys.exit(1)
         return
 

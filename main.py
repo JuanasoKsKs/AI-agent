@@ -31,7 +31,10 @@ def main():
     response = client.models.generate_content(
     model= model_name,
     contents=messages,
-    config=types.GenerateContentConfig(system_instruction=system_prompt)
+    config=types.GenerateContentConfig(
+        system_instruction=system_prompt,
+        tools=[available_functions]
+        )
     )
     um = response.usage_metadata
     if len(statement) > 2:
@@ -40,8 +43,13 @@ def main():
             print("Prompt tokens:", um.prompt_token_count)
             print("Response tokens:", um.candidates_token_count)
 
+    
 
-    print(response.text)
+    if response.function_calls:
+        for fc in response.function_calls:
+            print(f"Calling function: {fc.name}({fc.args})")
+    else:
+        print(response.text)
 
 if __name__ == "__main__":
     main()

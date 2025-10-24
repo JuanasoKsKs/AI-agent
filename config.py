@@ -1,6 +1,7 @@
 from google.genai import types
 MAX_CHARS = 10000
 model_name = 'gemini-2.0-flash-001'
+working_dic = "./calculator"
 system_prompt ="""
 You are a helpful AI coding agent.
 When a user asks a question or makes a request, make a function call plan. You can perform the following operations:
